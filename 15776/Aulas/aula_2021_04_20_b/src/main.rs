@@ -42,7 +42,7 @@ impl ListaLigada {
         x
     }
 
-    fn delete(&mut self, value: i32){
+    fn delete(&mut self, value: i32, buffer: &mut Vec<usize>){
         let position = self.search(value);
 
         if self.vec_prev[position] != 0 {
@@ -53,6 +53,8 @@ impl ListaLigada {
         if self.vec_next[position] != 0 {
             self.vec_prev[self.vec_next[position]] = self.vec_prev[position];
         }
+
+        buffer.push(position);
     }
 
     fn print(&self) {
@@ -71,6 +73,8 @@ fn main() {
         memoria_livre[i] = i;
     }
 
+    println!("Memoria Livre -> {:?}", memoria_livre);
+
     let mut position = match memoria_livre.pop() {
         Some(pos) => pos,
         None => 0,
@@ -84,6 +88,9 @@ fn main() {
         Some(pos) => pos,
         None => 0,
     };
+
+    println!("Memoria Livre -> {:?}", memoria_livre);
+
 
     lista.insert(position, 37);
     lista.print();
@@ -101,12 +108,26 @@ fn main() {
         None => 0,
     };
 
+    println!("Memoria Livre -> {:?}", memoria_livre);
+
+
     lista.insert(position, 87);
     lista.print();
 
     let pointer = lista.search(52);
     println!("Pointer -> {}", pointer);
 
-    lista.delete(52);
+    lista.delete(52, &mut memoria_livre);
     lista.print();
+
+    println!("Memoria Livre -> {:?}", memoria_livre);
+    
+    position = match memoria_livre.pop() {
+        Some(pos) => pos,
+        None => 0,
+    };
+
+    lista.insert(position, 52);
+    lista.print();
+    println!("Memoria Livre -> {:?}", memoria_livre);
 }

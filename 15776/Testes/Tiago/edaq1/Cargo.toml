@@ -9,3 +9,5 @@ edition = "2018"
 [dependencies]
 num = "0.4.0"
 rand = "0.8.3"
+statistical = "1.0.0"
+time = "0.2.27"

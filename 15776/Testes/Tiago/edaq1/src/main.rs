@@ -5,6 +5,8 @@
 
 use rand::Rng;
 use num::Complex;
+use statistical;
+use time::Instant;
 
 #[derive(Debug)]
 enum Algoritmo {
@@ -63,9 +65,6 @@ fn merge_i32(a: &mut Vec<num::Complex<f64>>, p: usize, q: usize, r:usize){
 
     for k in p..r + 1 {
 
-
-        //println!("{:?}", vec_l[i].norm());
-
         if vec_l[i].norm() <= vec_r[j].norm(){
             a[k] = vec_l[i];
             i = i + 1;
@@ -92,30 +91,90 @@ fn merge_sort_i32(a: &mut Vec<num::Complex<f64>>){
     merge_sort_part_i32(a, p, r);
 }
 
-fn sort_complex(){
+fn sort_complex(n: i32) -> time::Duration{
 
     let mut complex: Vec<num::Complex<f64>> = Vec::new();
 
     let mut rng = rand::thread_rng();
 
-    for i in 0..10 {
+    for _i in 0..n {
         let re: f64 = rng.gen_range(-10.0..10.0);
-        let im: f64 = rand::random::<f64>();
+        let im: f64 = rng.gen_range(-10.0..10.0);
+        let number = Complex::new(re, im);
+        complex.push(number);
+    }
+
+    println!("Size -> {}", complex.len());
+    //println!("Unsorted -> {:?}", complex);
+    let start = Instant::now();
+    merge_sort_i32(&mut complex);
+    let elapsed = start.elapsed();
+    //println!("Sorted -> {:?}", complex);
+
+    
+    //get_execution_time(elapsed);
+    let mut norm: Vec<f64> = Vec::new();
+
+    for elem in 0..complex.len() {
+        norm.push(complex[elem].norm())
+    }
+    //println!("Norm -> {:?}", norm);
+
+    println!("{:?}",elapsed);
+
+    return elapsed
+}
+
+
+fn sort_complex_before_time(n: i32){
+
+    let mut complex: Vec<num::Complex<f64>> = Vec::new();
+
+    let mut rng = rand::thread_rng();
+
+    for _i in 0..n {
+        let re: f64 = rng.gen_range(-10.0..10.0);
+        let im: f64 = rng.gen_range(-10.0..10.0);
         let number = Complex::new(re, im);
         complex.push(number);
     }
 
     println!("Size -> {}", complex.len());
     println!("Unsorted -> {:?}", complex);
+    
     merge_sort_i32(&mut complex);
     println!("Sorted -> {:?}", complex);
+}
+
+
+// fn calculate_array_size(time: time::Duration, n: i32) -> i32{
+
+//     let expected_duration: time::Duration = time::Duration::seconds(10);
+//     let size = ((n * expected_duration) / time).floor() as i32;
+
+//     return size;
+
+// }
+
+// fn erro_relativo(a: Vec<i32>) -> f64{
+
+// }
+
+fn sort_reverse(){
 
 }
 
 
+
 fn main() {
     
+    let n = 10;
     soma_assina("Andrei Razvan Oproiu");
-    sort_complex();
+    //let duration = sort_complex(n);
+    // let array_size = calculate_array_size(duration, n);
+    // sort_complex(array_size);
+
+    sort_complex_before_time(n);
+
     
 }

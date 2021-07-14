@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'aula_2021_04_20_b'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=aula_2021_04_20_b",
+                    "--package=aula_2021_04_20_b"
+                ],
+                "filter": {
+                    "name": "aula_2021_04_20_b",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'aula_2021_04_20_b'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=aula_2021_04_20_b",
+                    "--package=aula_2021_04_20_b"
+                ],
+                "filter": {
+                    "name": "aula_2021_04_20_b",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

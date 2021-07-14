@@ -1,0 +1,12 @@
+[package]
+name = "exame_eda_2021"
+version = "0.1.0"
+authors = ["José Jasnau Caeiro <j.caeiro@ipbeja.pt>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+petgraph = "0.6.0"
+priority-queue = "1.1.1"
+rand = "0.8.3"
